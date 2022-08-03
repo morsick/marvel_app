@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import CharListItem from '../charListItem/CharListItem'
 import './charList.scss';
 import nextId from "react-id-generator";
@@ -49,6 +50,10 @@ class CharList extends Component {
 			</div>
 		);
 	}
+}
+
+CharList.propTypes = {
+	onCharSelected: PropTypes.func.isRequired
 }
 
 export default CharList;
