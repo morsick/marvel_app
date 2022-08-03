@@ -23,13 +23,15 @@ class MarvelService {
 	}
 
 	_transformCharacter = (res) => {
-		const {name, description, thumbnail, urls} = res.data.results[0];
+		const { name, description, thumbnail, urls, comics } = res.data.results[0];
 		return {
 			name: name,
 			description: this._transformDescription(description),
 			thumbnail: `${thumbnail.path}.${thumbnail.extension}`,
 			homepage: urls[0].url,
 			wiki: urls[1].url,
+			comics: comics.items
+
 		}
 	}
 

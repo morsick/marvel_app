@@ -1,6 +1,6 @@
 import { Component } from "react";
 import MarvelService from '../../services/MarvelService'
-import Spinner from '../spinner/004 Spinner';
+import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../erroreMessage/ErroreMessage';
 
 class CharListItem extends Component {
@@ -49,21 +49,25 @@ class CharListItem extends Component {
 		const content = erroreMessage || spinner || <View char={char} />;
 
 		return (
-			<div>
+			<li className="char__item" onClick={() => { this.props.onCharSelected(this.charId) }}>
 				{content}
-			</div>
+			</li>
 		);
 	}
 }
 
 const View = ({ char }) => {
 	const { name, thumbnail } = char;
+	let imgStyle = { 'objectFit': 'cover' };
+	if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
+		imgStyle = { 'objectFit': 'unset' };
+	}
 
 	return (
-		<li className="char__item">
-			<img src={thumbnail} alt="abyss" />
+		<div>
+			<img src={thumbnail} alt="abyss" style={imgStyle} />
 			<div className="char__name">{name}</div>
-		</li>
+		</div>
 	);
 }
 

@@ -2,7 +2,7 @@ import { Component } from 'react';
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
 import MarvelService from '../../services/MarvelService'
-import Spinner from '../spinner/004 Spinner';
+import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../erroreMessage/ErroreMessage';
 
 class RandomChar extends Component {

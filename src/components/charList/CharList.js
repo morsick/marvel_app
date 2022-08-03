@@ -22,7 +22,7 @@ class CharList extends Component {
 			for (let i = this.currentItems.length; i < itemOnPage; i++) {
 				const id = nextId();
 				const charId = Math.round(Math.random() * (1011400 - 1011000) + 1011000);
-				this.currentItems.push(<CharListItem key={id} charId={charId} />);
+				this.currentItems.push(<CharListItem key={id} charId={charId} onCharSelected={this.props.onCharSelected} />);
 			}
 		}
 
