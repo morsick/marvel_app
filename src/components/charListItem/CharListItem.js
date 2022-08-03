@@ -1,7 +1,7 @@
 import { Component } from "react";
 import MarvelService from '../../services/MarvelService'
 import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../erroreMessage/ErroreMessage';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 
 class CharListItem extends Component {
 	constructor(props) {
@@ -44,9 +44,16 @@ class CharListItem extends Component {
 
 	render() {
 		const { char, loading, error } = this.state;
-		const erroreMessage = error ? <ErrorMessage /> : null;
-		const spinner = loading ? <Spinner /> : null;
-		const content = erroreMessage || spinner || <View char={char} />;
+		const erroreMessage = error ? <ErrorMessage />: null;
+		const spinner = loading ? <div style={{ 'margin': '45px -15px' }}><Spinner /></div> : null;
+		const content = spinner || <View char={char} />;
+
+		if (erroreMessage)
+		{
+			return (
+				erroreMessage
+			);
+		}
 
 		return (
 			<li className="char__item" onClick={() => { this.props.onCharSelected(this.charId) }}>

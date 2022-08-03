@@ -3,7 +3,7 @@ import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
 import MarvelService from '../../services/MarvelService'
 import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../erroreMessage/ErroreMessage';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 
 class RandomChar extends Component {
 	state = {
