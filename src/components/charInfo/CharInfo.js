@@ -113,7 +113,7 @@ const View = ({ char }) => {
 				{
 					comics.map((item, i) => {
 						// eslint-disable-next-line
-						if (i > 9) return;
+						if (i > 3) return;
 						return (
 							<li key={i} className="char__comics-item">
 								{item.name}

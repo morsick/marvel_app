@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
@@ -9,6 +9,8 @@ import decoration from '../../resources/img/vision.png';
 
 class App extends Component {
 
+	charListRef = React.createRef();
+
 	state = {
 		selectedChar: null
 	}
@@ -17,6 +19,8 @@ class App extends Component {
 		this.setState({
 			selectedChar: id
 		})
+
+		this.charListRef && this.charListRef.current.selectCharItemBy(id);
 	}
 
 	render() {
@@ -26,7 +30,7 @@ class App extends Component {
 				<main>
 					<RandomChar />
 					<div className="char__content">
-						<CharList onCharSelected={this.onCharSelected} />
+						<CharList ref={this.charListRef} onCharSelected={this.onCharSelected} />
 						<ErrorBoundary>
 							<CharInfo charId={this.state.selectedChar} />
 						</ErrorBoundary>

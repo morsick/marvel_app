@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types'
 import CharListItem from '../charListItem/CharListItem'
 import './charList.scss';
@@ -10,10 +11,18 @@ class CharList extends Component {
 		super(props);
 
 		this.currentItems = [];
+		this.currentItemsRef = [];
 
 		this.state = {
-			itemOnPage: 9
+			itemOnPage: 3
 		}
+	}
+
+	selectCharItemBy = (id) => {
+		this.currentItemsRef.forEach((ref) => {
+			const state = ref.current.getCharId() === id ? true : false;
+			ref.current.updateSelectState(state);
+		});
 	}
 
 	getCharList = () => {
@@ -21,9 +30,11 @@ class CharList extends Component {
 
 		if (this.currentItems.length !== itemOnPage) {
 			for (let i = this.currentItems.length; i < itemOnPage; i++) {
+				const charRef = React.createRef();
 				const id = nextId();
 				const charId = Math.round(Math.random() * (1011400 - 1011000) + 1011000);
-				this.currentItems.push(<CharListItem key={id} charId={charId} onCharSelected={this.props.onCharSelected} />);
+				this.currentItems.push(<CharListItem ref={charRef} key={id} charId={charId} onCharSelected={this.props.onCharSelected} />);
+				this.currentItemsRef.push(charRef);
 			}
 		}
 
@@ -33,7 +44,7 @@ class CharList extends Component {
 	onLoadMoreCharItemClick = () => {
 		this.setState((props) => {
 			return ({
-				itemOnPage: props.itemOnPage + 9,
+				itemOnPage: props.itemOnPage + 3,
 			});
 		});
 	}

@@ -10,16 +10,29 @@ class CharListItem extends Component {
 		this.state = {
 			char: {},
 			loading: true,
-			error: false
+			error: false,
+			selected: false
 		}
 
 		this.charId = this.props.charId;
+	}
+
+	updateSelectState(state) {
+		this.setState(() => {
+			return {
+				selected: state
+			}
+		})
 	}
 
 	marvelService = new MarvelService();
 
 	componentDidMount() {
 		this.updateChar();
+	}
+
+	getCharId() {
+		return this.charId;
 	}
 
 	updateChar() {
@@ -43,7 +56,7 @@ class CharListItem extends Component {
 	}
 
 	render() {
-		const { char, loading, error } = this.state;
+		const { char, loading, error, selected} = this.state;
 		const erroreMessage = error ? <ErrorMessage />: null;
 		const spinner = loading ? <div style={{ 'margin': '45px -15px' }}><Spinner /></div> : null;
 		const content = spinner || <View char={char} />;
@@ -55,8 +68,10 @@ class CharListItem extends Component {
 			);
 		}
 
+		const className = selected ? 'char__item char__item_selected' : 'char__item';
+
 		return (
-			<li className="char__item" onClick={() => { this.props.onCharSelected(this.charId) }}>
+			<li className={className} onClick={() => { this.props.onCharSelected(this.charId) }}>
 				{content}
 			</li>
 		);
